@@ -1,0 +1,53 @@
+package Opgave4;
+import java.util.ArrayList;
+public class Team {
+    String teamName;
+    ArrayList<Player> players;
+
+    public Team(String teamName){
+        this.teamName = teamName;
+        this.players = new ArrayList<>();
+    }
+
+    public void addPlayer(Player p){
+        players.add(p);
+        System.out.println(p.name + " added to "+ teamName);
+    }
+
+    public double getAverageSkill(){
+        if(players.size()==0){
+            return 0;
+        }
+
+        int totalSkill = 0;
+        for (Player p : players){
+            totalSkill = totalSkill + p.skillLevel;
+        } return (double)totalSkill / players.size();
+    }
+
+    public void printTeam(){
+        System.out.println("\n=== " + teamName + " === ");
+        System.out.println("Players: ");
+        for (Player p : players) {
+            System.out.println("- " + p);
+        }
+        System.out.println("Average skill: " + getAverageSkill());
+    }
+
+    public void compete(Team opponent){
+        System.out.println("\n===" + teamName + " vs " + opponent.teamName + " === ");
+        double mySkill = getAverageSkill();
+        double opponentSkill = opponent.getAverageSkill();
+
+        System.out.println(teamName + " skill: " + mySkill);
+        System.out.println(opponent.teamName + " skill : " + opponentSkill);
+
+        if (mySkill>opponentSkill){
+            System.out.println("Winner: " + teamName);
+        } else if (opponentSkill>mySkill){
+            System.out.println("Winner: "+ opponent.teamName);
+        } else {
+            System.out.println("TIE!");
+        }
+    }
+}
